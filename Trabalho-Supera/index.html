@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <button v-on:click="cont+=1">Entrar</button>
+        <br>
+        <div v-if="cont!=0">
+            <p>Digite seu ID usuario</p>
+            <input type="number" v-model="entrar">
+            <p>Digite sua senha</p>
+            <input type="text" v-model="acesso.senha">
+        </div>
+        <div v-if="entrar in acesso.login">
+            <div v-if="acesso.senha==0">
+                <br>
+                <button v-on:click="contador+=1">Cadastrar ferramenta</button>
+                <br>
+                <div v-if="contador!=0">
+                    <p>Digite o nome da ferramenta</p>
+                    <input type="text" v-model="ferramenta.nome">
+                    <p>Digite o ID de usuario</p>
+                    <input type="number" v-model="ferramenta.IDusuario">
+                    <p>Digite o tempo de disponibilidade</p>
+                    <input type="number" v-model="ferramenta.Tdisponivel">
+                </div>
+            </div>
+        </div>
+        <br>
+        <button v-on:click="contador2+=1">Cadastro Usuario</button>
+        <br>
+        <div v-if="contador2!=0">
+            <p>Digite seu nome</p>
+            <input type="text" v-model="cadastro.nomeU.push()">
+            <p>Digite o seu bloco</p>
+            <input type="number" v-model="cadastro.bloco">
+            <p>Digite o numero de sua casa</p>
+            <input type="number" v-model="cadastro.Ncasa">
+            <p>Digite o seu CPF</p>
+            <input type="number" v-model="cadastro.CPF">
+            <p>Digite a sua senha</p>
+            <input type="text" v-model="acesso.senha">
+            <div v-if="acesso.senha!= ' '">
+                <p>Seu ID usuario e: {{acesso.login}}</p>
+            </div>
+    </div>
+
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            titulo: "Sistema de emprestimo/alugo de ferramentas",
+            cont: 0,
+            contador: 0,
+            contador2: 0,
+            entrar: " ",
+            acesso: { login: [0, ], senha: [0, ] },
+            ferramenta: { nomeF: [], IDusuario: [], Tdisponivel: [] },
+            cadastro: { nomeU: [], Ncasa: [], CPF:[] },
+           },
+           mounted(){
+               if(localStorage.getItem('acesso.login')){
+                   try{
+                       this.login = JSON.parse(localStorage.getItem('acesso.login'));
+                   } catch(e) {
+                       localStorage.removeItem('acesso.login');
+                   }
+               }
+               if(localStorage.getItem('acesso.senha')){
+                   try{
+                       this.login = JSON.parse(localStorage.getItem('acesso.login'));
+                   } catch(e) {
+                       localStorage.removeItem('acesso.login');
+                   }
+               }
+           }
+        })
+    </script>
+</body>
+</html>
